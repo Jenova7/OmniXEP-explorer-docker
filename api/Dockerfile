@@ -19,13 +19,16 @@ RUN apt-get install -y git-core \
                       python-pip \
                       wget \
                       lsb-core \
-                      supervisor
+                      supervisor \
+                      libpq-dev \
+                      libffi-dev \
+                      libssl-dev
 
 # Install nginx
 RUN cd /tmp/ && wget http://nginx.org/keys/nginx_signing.key
 RUN apt-key add /tmp/nginx_signing.key
 RUN sh -c "echo 'deb http://nginx.org/packages/mainline/ubuntu/ '$(lsb_release -cs)' nginx' > /etc/apt/sources.list.d/nginx.list"
-RUN apt-get update && apt-get install nginx
+RUN apt-get update -y && apt-get -y install nginx
 
 
 # Install bitcoin armory
@@ -44,7 +47,7 @@ RUN  ./autogen.sh && ./configure && make && make install
 # Install omniapi
 WORKDIR /home/ubuntu
 
-ARG OMNILAYER_VERSION=1d7c7945dbc60ed7a29e5b101fc1021787ed03ce
+ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
 
 RUN git clone https://github.com/OmniLayer/omniapi.git
 WORKDIR /home/ubuntu/omniapi

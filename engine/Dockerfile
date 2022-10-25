@@ -32,14 +32,14 @@ RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/${FLY
 # Install engine
 WORKDIR /root
 
-ARG OMNILAYER_VERSION=15baec3ec9c4583ad183958ff35462737f2406c3
+ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
 
 RUN git clone https://github.com/OmniLayer/omniEngine.git
 WORKDIR /root/omniEngine
 
 RUN git checkout ${OMNILAYER_VERSION}
 
-RUN pip install --upgrade pip
+#RUN pip install --upgrade pip
 
 RUN pip install -r requirements.txt
 
