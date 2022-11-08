@@ -10,7 +10,6 @@
  */
 import generateTemplate from 'utils/generateTemplate';
 
-export const API_URL_BASE = 'https://api.omniexplorer.info/v1';
 export const API_TESTNET_URL_BASE = 'https://testnetapi.omniexplorer.info/v1';
 export const API_OMNIFEATHER_URL_BASE = 'https://api.omnifeather.com/v1';
 export const API_LTC_URL_BASE = 'https://api.omnilite.org/v1';
@@ -39,18 +38,18 @@ export const TXS_CLASS_AB = 'txs-class-a-b';
 export const TXCLASSAB_ADDRESS_MAINNET = '1EXoDusjGwvnjZUyKkxZ4UHEf77z6A5S4P';
 export const TXCLASSAB_ADDRESS_TESTNET = 'mpexoDuSkGGqvqrkrjiFng38QPkJQVFyqv';
 
-const setApiUrl = () => {
-  const hostName = window.location.hostname;
+const hostName = window.location.hostname;
 
-  if (/localhost/i.test(hostName)) {
-    API_URL_BASE = 'https://localhost:4005/v1';
+let apiUrlBase;
+
+if (/localhost/i.test(hostName)) {
+  apiUrlBase = 'https://localhost:4005/v1';
+} else {
+  if (hostName.indexOf('vxxs.vxxl.org') > -1) {
+    apiUrlBase = 'https://vxxs-api.vxxl.org/v1'
   } else {
-    if (hostName.indexOf('mydomain.com') > -1) {
-      API_URL_BASE = 'https://omni-api.mydomain.com/v1'
-    } else {
-      API_URL_BASE = 'https://omni-api.qa.mydomain.com/v1'
-    }
+    apiUrlBase = 'https://vxxs-api-testnet.vxxl.org/v1'
   }
-};
+}
 
-setApiUrl();
+export const API_URL_BASE = apiUrlBase;

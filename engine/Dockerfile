@@ -34,7 +34,7 @@ WORKDIR /root
 
 ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
 
-RUN git clone https://github.com/OmniLayer/omniEngine.git
+RUN git clone https://github.com/VXXL-Project/omniEngine.git
 WORKDIR /root/omniEngine
 
 RUN git checkout ${OMNILAYER_VERSION}
