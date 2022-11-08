@@ -16,7 +16,7 @@ RUN apt-get install -y git-core \
                       curl \
                       openjdk-8-jre
 
-RUN pip install python-crontab
+RUN pip install python-crontab==2.5.1
 
 
 # install flyway to use it for applying migration (omni team use bad practice - just setup sql files on database. We will use flyway for that)
