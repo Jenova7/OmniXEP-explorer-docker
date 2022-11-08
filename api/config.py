@@ -10,6 +10,8 @@ WELCOMECID = None #mailgun campaign id for welcome email stats
 
 #For wallets and session store you can switch between disk and the database
 LOCALDEVBYPASSDB = 0    #Set to 1 to use local storage/file system, Set to 0 to use database
+#local data dir if not using db
+LOCALDATADIR = '../data'
 
 #Used to generate challange/response hash
 SERVER_SECRET = 'SoSecret!'
@@ -41,3 +43,21 @@ REDIS_ADDRSPACE=""
 BTCBAL_CACHE=600
 #Debug level (2: errors only,3: 2+ratelimit info 4: 3+general info, 7: 4+cache debugging)
 DEBUG_LEVEL=3
+#CORS config for websocket
+WEBSOCKET_CORS=""
+
+#Cloudflare acct id and apikey
+CFID = None
+CFKEY = None
+
+#Testnet
+TESTNET=0
+
+def apiLookup(id):
+  try:
+    convert={"tokenid":""
+            }
+    return convert[id]
+  except KeyError:
+    return -1
+
