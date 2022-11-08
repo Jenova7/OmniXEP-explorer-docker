@@ -47,9 +47,9 @@ RUN  ./autogen.sh && ./configure && make && make install
 # Install omniapi
 WORKDIR /home/ubuntu
 
-ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
+ARG OMNILAYER_VERSION=87453e88e62c387cbb47b58bf8c1922a69904e46
 
-RUN git clone https://github.com/OmniLayer/omniapi.git
+RUN git clone https://github.com/VXXL-Project/omniapi.git
 WORKDIR /home/ubuntu/omniapi
 
 RUN git checkout ${OMNILAYER_VERSION}
