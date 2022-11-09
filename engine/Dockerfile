@@ -32,7 +32,7 @@ RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/${FLY
 # Install engine
 WORKDIR /root
 
-ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
+ARG OMNILAYER_VERSION=87a76bfc497c0b35ba9b49ed6d4eede198f52b3e
 
 RUN git clone https://github.com/VXXL-Project/omniEngine.git
 WORKDIR /root/omniEngine
