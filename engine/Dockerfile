@@ -44,8 +44,8 @@ RUN git checkout ${OMNILAYER_VERSION}
 RUN pip install -r requirements.txt
 
 #Setup configs
-COPY bitcoin.conf /home/root/.bitcoin/
-COPY sql.conf /home/root/.omni/
+COPY bitcoin.conf /root/.bitcoin/
+COPY sql.conf /root/.omni/
 COPY run.sh /root/omniEngine/run.sh
 COPY config.py /root/omniEngine/config.py
 
@@ -53,8 +53,6 @@ COPY config.py /root/omniEngine/config.py
 COPY installOmniEngineCronJob.py /root/omniEngine/install/installOmniEngineCronJob.py
 
 # Patch omniEngine to force stdout print and use other configuration for testnet
-COPY omniEngine.py /root/omniEngine/omniEngine.py
-COPY sql.py /root/omniEngine/sql.py
 COPY db /flyway/sql/
 
 RUN chmod +x /root/omniEngine/run.sh

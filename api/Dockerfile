@@ -61,8 +61,8 @@ RUN mkdir /home/ubuntu/omniapi/logs/
 RUN cp  /home/ubuntu/omniapi/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
 
 #Setup omniapi configs
-COPY bitcoin.conf /home/root/.bitcoin/
-COPY sql.conf /home/root/.omni/
+COPY bitcoin.conf /root/.bitcoin/
+COPY sql.conf /root/.omni/
 COPY config.py /home/ubuntu/omniapi/api/config.py
 
 # Patch rate limit to be able to disable them
