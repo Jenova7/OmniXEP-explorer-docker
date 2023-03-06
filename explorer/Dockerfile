@@ -18,14 +18,28 @@ RUN apt-get install -y git-core \
 RUN ln -s /usr/bin/python2.7 /usr/bin/python
 RUN ln -s /usr/bin/python2.7 /usr/bin/python2
 
+#RUN add-apt-repository -y ppa:linuxuprising/libpng12
+#RUN apt-get update -y
+#RUN apt-get install -y libpng12-0
+
+#RUN wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb \
+#      && dpkg -i /tmp/libpng12.deb \
+#      && rm /tmp/libpng12.deb
+
+#RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64.deb
+#RUN dpkg -i dumb-init_*.deb
+
 # Install omni explorer
 WORKDIR /home/ubuntu
 
-ARG OMNILAYER_VERSION=c706fda96f361b452e4196dcb34d2da44f9d39b0
-RUN git clone https://github.com/VXXL-Project/omniexplorer.git
+#ARG OMNILAYER_VERSION=c706fda96f361b452e4196dcb34d2da44f9d39b0
+#RUN git clone https://github.com/OmniLayer/omniexplorer.git
+#RUN echo "${SSH_PRIVATE_KEY}" > /root/.ssh/id_rsa
+COPY omniexplorer /home/ubuntu/omniexplorer
+#RUN git clone git@github.com:VXXL-Project/omniexplorer.git
 WORKDIR /home/ubuntu/omniexplorer
 
-RUN git checkout ${OMNILAYER_VERSION}
+#RUN git checkout ${OMNILAYER_VERSION}
 
 # Patch several files
 

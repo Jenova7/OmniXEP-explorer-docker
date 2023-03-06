@@ -6,17 +6,21 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
 RUN apt-get install -y git-core \
-                      python-dev \
+                     # python-dev \
                       libffi-dev \
                       libpq-dev \
                       postgresql \
                       libcurl4-openssl-dev \
-                      python-pip \
+                     # python-pip \
                       supervisor \
                       curl \
                       openjdk-8-jre
+RUN apt-get install -y wget build-essential && wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz && tar xf Python-2.7.18.tgz && cd Python-2.7.18 && ./configure && make && make install
+RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py \
+&&  python get-pip.py \
+&& python -m pip install python-crontab==2.5.1
 
-RUN pip install python-crontab==2.5.1
+#RUN python2 -m pip install python-crontab==2.5.1
 
 
 # install flyway to use it for applying migration (omni team use bad practice - just setup sql files on database. We will use flyway for that)
@@ -32,16 +36,19 @@ RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/${FLY
 # Install engine
 WORKDIR /root
 
-ARG OMNILAYER_VERSION=87a76bfc497c0b35ba9b49ed6d4eede198f52b3e
+#ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
 
-RUN git clone https://github.com/VXXL-Project/omniEngine.git
+#RUN git clone https://github.com/OmniLayer/omniEngine.git
+#ARG SSH_PRIVATE_KEY
+COPY omniEngine /root/omniEngine
+#RUN git clone git@github.com:VXXL-Project/omniEngine.git
 WORKDIR /root/omniEngine
 
-RUN git checkout ${OMNILAYER_VERSION}
+#RUN git checkout ${OMNILAYER_VERSION}
 
 #RUN pip install --upgrade pip
 
-RUN pip install -r requirements.txt
+RUN python -m pip install -r requirements.txt
 
 #Setup configs
 COPY bitcoin.conf /root/.bitcoin/
@@ -53,7 +60,9 @@ COPY config.py /root/omniEngine/config.py
 COPY installOmniEngineCronJob.py /root/omniEngine/install/installOmniEngineCronJob.py
 
 # Patch omniEngine to force stdout print and use other configuration for testnet
-COPY db /flyway/sql/
+#COPY omniEngine.py /root/omniEngine/omniEngine.py
+#COPY sql.py /root/omniEngine/sql.py
+#COPY db /flyway/sql/
 
 RUN chmod +x /root/omniEngine/run.sh
 

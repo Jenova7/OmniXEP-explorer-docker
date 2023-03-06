@@ -60,4 +60,3 @@ def apiLookup(id):
     return convert[id]
   except KeyError:
     return -1
-

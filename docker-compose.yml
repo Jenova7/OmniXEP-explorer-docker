@@ -6,12 +6,12 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - omni_postgres
-      - omni_core
+#      - omni_core
       - omni_engine
       - omni_redis
     links:
       - omni_postgres
-      - omni_core
+#      - omni_core
       - omni_redis
     ports:
       - "4005:80"
@@ -26,18 +26,19 @@ services:
       - omni_api
     ports:
       - "4006:3000"
-
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-explorer"}]'
   omni_engine:
     build:
       context: engine
       dockerfile: Dockerfile
     depends_on:
       - omni_postgres
-      - omni_core
+ #     - omni_core
       - omni_redis
     links:
       - omni_postgres
-      - omni_core
+  #    - omni_core
       - omni_redis
     environment:
       FLYWAY_PLACEHOLDERS_OMNIAPIPASSWORD: omniapipass
@@ -48,26 +49,28 @@ services:
       PGPORT: 5432
       OMNIDB_DATABASE: omni
       NETWORK: testnet
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-explorer"}]'
 
-  omni_core:
-    build:
-      context: core
-      dockerfile: Dockerfile
-    volumes:
-      - omnicore:/root/.bitcoin
-    ports:
-      - "18532:18332"
-    command: >
-      -server
-      -testnet
-      -txindex
-      -rpcuser=username
-      -rpcpassword=password
-      -rpcallowip=172.0.0.0/8
-      -rpcport=18332
+#  omni_core:
+#    build:
+#      context: core
+#      dockerfile: Dockerfile
+#    volumes:
+#      - omnicore:/root/.VXXL
+#    ports:
+#      - "18532:18332"
+#    command: >
+#      -server
+#      -testnet
+#      -txindex
+#      -rpcuser=username
+#      -rpcpassword=password
+#      -rpcallowip=172.0.0.0/8
+#      -rpcport=18332
 
   omni_postgres:
-    image: postgres:alpine
+    image: postgres:10-alpine
     restart: always
     ports:
       - "5436:5432"
@@ -76,12 +79,14 @@ services:
     environment:
       POSTGRES_PASSWORD: postgresspass
       POSTGRES_DB: omni
-
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-postgres"}]'
   omni_redis:
     image: redis:alpine
     restart: always
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-redis"}]'
 
 volumes:
   pgdata:
-  omnicore:
-
+#  omnicore:
