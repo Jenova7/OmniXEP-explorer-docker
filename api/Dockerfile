@@ -49,8 +49,7 @@ WORKDIR /home/ubuntu
 
 ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
 
-#RUN git clone https://github.com/OmniLayer/omniapi.git
-COPY omniapi /home/ubuntu/omniapi
+RUN git clone https://github.com/VXXL-Project/omniapi.git
 WORKDIR /home/ubuntu/omniapi
 
 #RUN git checkout ${OMNILAYER_VERSION}
