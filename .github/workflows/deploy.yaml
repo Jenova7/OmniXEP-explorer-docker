@@ -16,14 +16,14 @@ jobs:
           rm -rf /root/omni
           mkdir /root/omni
           cp ./* /root/omni/ -r
-          sed -i 's/USER_RPC/{{ secrets.USER_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/PASSWORD_RPC/{{ secrets.PASSWORD_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/PORT_RPC/{{ secrets.PORT_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/SERVER_RPC/{{ secrets.SERVER_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/USER_RPC/{{ secrets.USER_RPC }}/' /root/omni/engine/bitcoin.conf
-          sed -i 's/PASSWORD_RPC/{{ secrets.PASSWORD_RPC }}/' /root/omni/engine/bitcoin.conf
-          sed -i 's/PORT_RPC/{{ secrets.PORT_RPC }}/' /root/omni/engine/bitcoin.conf
-          sed -i 's/SERVER_RPC/{{ secrets.SERVER_RPC }}/' /root/omni/engine/bitcoin.conf
+          sed -i 's/USER_RPC/${{ secrets.USER_RPC }}/' /root/omni/api/bitcoin.conf
+          sed -i 's/PASSWORD_RPC/${{ secrets.PASSWORD_RPC }}/' /root/omni/api/bitcoin.conf
+          sed -i 's/PORT_RPC/${{ secrets.PORT_RPC }}/' /root/omni/api/bitcoin.conf
+          sed -i 's/SERVER_RPC/${{ secrets.SERVER_RPC }}/' /root/omni/api/bitcoin.conf
+          sed -i 's/USER_RPC/${{ secrets.USER_RPC }}/' /root/omni/engine/bitcoin.conf
+          sed -i 's/PASSWORD_RPC/${{ secrets.PASSWORD_RPC }}/' /root/omni/engine/bitcoin.conf
+          sed -i 's/PORT_RPC/${{ secrets.PORT_RPC }}/' /root/omni/engine/bitcoin.conf
+          sed -i 's/SERVER_RPC/${{ secrets.SERVER_RPC }}/' /root/omni/engine/bitcoin.conf
           cd /root/omni/engine
           git clone git@github.com:VXXL-Project/omniEngine.git
           cd ..
