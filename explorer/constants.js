@@ -44,10 +44,10 @@ let apiUrlBase;
 if (/localhost/i.test(hostName)) {
   apiUrlBase = 'https://localhost:4005/v1';
 } else {
-  if (hostName.indexOf('vxxs-explorer.vxxl.org') > -1) {
-    apiUrlBase = 'https://vxxs-explorer-api.vxxl.org/v1'
+    if (hostName.indexOf('51.195.40.45') > -1) {
+      apiUrlBase = '51.195.40.45/v1'
   } else {
-    apiUrlBase = 'https://vxxs-explorer-api-testnet.vxxl.org/v1'
+        apiUrlBase = '51.195.40.45/v1'
   }
 }
 

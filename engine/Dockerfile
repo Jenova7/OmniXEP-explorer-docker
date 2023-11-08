@@ -34,15 +34,15 @@ RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/${FLY
   && ln -s /flyway/flyway /usr/local/bin/flyway
 
 # Install engine
-WORKDIR /root
+WORKDIR /home/ubuntu
 
 #ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
 
-#RUN git clone https://github.com/OmniLayer/omniEngine.git
+RUN git clone https://github.com/MotoAcidic/omniEngine.git
 #ARG SSH_PRIVATE_KEY
-COPY omniEngine /root/omniEngine
+COPY omniEngine /home/ubuntu/omniEngine
 #RUN git clone git@github.com:VXXL-Project/omniEngine.git
-WORKDIR /root/omniEngine
+WORKDIR /home/ubuntu/omniEngine
 
 #RUN git checkout ${OMNILAYER_VERSION}
 
@@ -51,10 +51,10 @@ WORKDIR /root/omniEngine
 RUN python -m pip install -r requirements.txt
 
 #Setup configs
-COPY bitcoin.conf /root/.bitcoin/
-COPY sql.conf /root/.omni/
-COPY run.sh /root/omniEngine/run.sh
-COPY config.py /root/omniEngine/config.py
+COPY bitcoin.conf /home/ubuntu/.bitcoin/
+COPY sql.conf /home/ubuntu/.omni/
+COPY run.sh /home/ubuntu/omniEngine/run.sh
+COPY config.py /home/ubuntu/omniEngine/config.py
 
 # Patch installOmniEngineCronJob to forward network variable and pass logs to docker stdout
 COPY installOmniEngineCronJob.py /root/omniEngine/install/installOmniEngineCronJob.py
@@ -64,9 +64,9 @@ COPY installOmniEngineCronJob.py /root/omniEngine/install/installOmniEngineCronJ
 #COPY sql.py /root/omniEngine/sql.py
 #COPY db /flyway/sql/
 
-RUN chmod +x /root/omniEngine/run.sh
+RUN chmod +x /home/ubuntu/omniEngine/run.sh
 
-RUN mkdir /root/omniEngine/logs
+RUN mkdir /home/ubuntu/omniEngine/logs
 
 # add supervisor conf to launch nginx and api
 COPY supervisord.conf /etc/supervisor/conf.d/

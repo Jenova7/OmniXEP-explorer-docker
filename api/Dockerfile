@@ -49,7 +49,7 @@ WORKDIR /home/ubuntu
 
 ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
 
-RUN git clone https://github.com/VXXL-Project/omniapi.git
+RUN git clone https://github.com/MotoAcidic/omniapi/tree/xep-testing.git
 WORKDIR /home/ubuntu/omniapi
 
 #RUN git checkout ${OMNILAYER_VERSION}
@@ -61,8 +61,8 @@ RUN mkdir /home/ubuntu/omniapi/logs/
 RUN cp  /home/ubuntu/omniapi/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
 
 #Setup omniapi configs
-COPY bitcoin.conf /root/.bitcoin/
-COPY sql.conf /root/.omni/
+COPY bitcoin.conf /home/ubuntu/.bitcoin/
+COPY sql.conf /home/ubuntu/.omni/
 COPY config.py /home/ubuntu/omniapi/api/config.py
 
 # Patch rate limit to be able to disable them

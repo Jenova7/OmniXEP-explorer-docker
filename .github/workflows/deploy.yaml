@@ -13,19 +13,19 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          rm -rf /root/omni
-          mkdir /root/omni
+          rm -rf /home/ubuntu/omni
+          mkdir /home/ubuntu/omni
           cp ./* /root/omni/ -r
-          sed -i 's/USER_RPC/${{ secrets.USER_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/PASSWORD_RPC/${{ secrets.PASSWORD_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/PORT_RPC/${{ secrets.PORT_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/SERVER_RPC/${{ secrets.SERVER_RPC }}/' /root/omni/api/bitcoin.conf
-          sed -i 's/USER_RPC/${{ secrets.USER_RPC }}/' /root/omni/engine/bitcoin.conf
-          sed -i 's/PASSWORD_RPC/${{ secrets.PASSWORD_RPC }}/' /root/omni/engine/bitcoin.conf
-          sed -i 's/PORT_RPC/${{ secrets.PORT_RPC }}/' /root/omni/engine/bitcoin.conf
-          sed -i 's/SERVER_RPC/${{ secrets.SERVER_RPC }}/' /root/omni/engine/bitcoin.conf
-          cd /root/omni/engine
-          git clone git@github.com:VXXL-Project/omniEngine.git
+          sed -i 's/USER_RPC/${{ secrets.USER_RPC }}/' /home/ubuntu/omni/api/bitcoin.conf
+          sed -i 's/PASSWORD_RPC/${{ secrets.PASSWORD_RPC }}/' /home/ubuntu/omni/api/bitcoin.conf
+          sed -i 's/PORT_RPC/${{ secrets.PORT_RPC }}/' /home/ubuntu/omni/api/bitcoin.conf
+          sed -i 's/SERVER_RPC/${{ secrets.SERVER_RPC }}/' /home/ubuntu/omni/api/bitcoin.conf
+          sed -i 's/USER_RPC/${{ secrets.USER_RPC }}/' /home/ubuntu/omni/engine/bitcoin.conf
+          sed -i 's/PASSWORD_RPC/${{ secrets.PASSWORD_RPC }}/' /home/ubuntu/omni/engine/bitcoin.conf
+          sed -i 's/PORT_RPC/${{ secrets.PORT_RPC }}/' /home/ubuntu/omni/engine/bitcoin.conf
+          sed -i 's/SERVER_RPC/${{ secrets.SERVER_RPC }}/' /home/ubuntu/omni/engine/bitcoin.conf
+          cd /home/ubuntu/omni/engine
+          git clone git@github.com:MotoAcidic/omniEngine.git
           cd ..
           docker-compose build --no-cache
           docker-compose up -d 

@@ -16,8 +16,8 @@
 #fi
 
 #cd /flyway && FLYWAY_URL="jdbc:postgresql://${PGHOST}:${PGPORT}/${OMNIDB_DATABASE}" FLYWAY_PASSWORD="${PGPASSWORD}" flyway -user=${PGUSER} migrate
-/root/omniEngine/database/scripts/db-init.sh
+/home/ubuntu/omniEngine/database/scripts/db-init.sh
 
-python /root/omniEngine/install/installOmniEngineCronJob.py
+python /home/ubuntu/omniEngine/install/installOmniEngineCronJob.py
 
 /usr/sbin/cron -f -L /dev/stdout
