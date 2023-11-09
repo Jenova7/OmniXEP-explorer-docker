@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:8-slim
+FROM ubuntu:18.04
 
 #Install deps
 RUN apt-get update
