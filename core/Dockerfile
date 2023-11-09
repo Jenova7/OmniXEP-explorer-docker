@@ -12,9 +12,10 @@ ENV RPCPASSWORD          omnicore
 
 RUN apt-get update && apt-get install -qq \
   curl
-RUN curl -L "https://bintray.com/artifact/download/omni/OmniBinaries/omnicore-${OMNICORE_VER}-${OMNICORE_ARCH}-linux-gnu.tar.gz" -o omnicore-${OMNICORE_VER}-${OMNICORE_ARCH}-linux-gnu.tar.gz
-RUN echo  ${OMNICOR_CHECKSUM} omnicore-${OMNICORE_VER}-${OMNICORE_ARCH}-linux-gnu.tar.gz|sha256sum --check
-RUN tar -xvf omnicore-${OMNICORE_VER}-${OMNICORE_ARCH}-linux-gnu.tar.gz --transform="s/^omnicore-0.4.0//" omnicore-0.4.0 -C /
+RUN wget "https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixep-cli"
+RUN echo  "Downloaded omnixep-cli"
+RUN wget "https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixepd"
+RUN echo  "Downloaded omnixepd"
 
 EXPOSE 8332-8333/tcp 18332-18333/tcp
 VOLUME ["${DATA_DIR}"]
@@ -24,4 +25,4 @@ ADD entrypoint.sh /entrypoint.sh
 RUN chmod u+x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["omnicored"]
+CMD ["omnixepd"]

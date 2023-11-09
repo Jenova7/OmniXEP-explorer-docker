@@ -2,12 +2,12 @@
 set -e
 
 if [[ $(echo "$1" | cut -c1) = "-" ]]; then
-  echo "$0: assuming arguments for omnicored"
+  echo "$0: assuming arguments for omnixepd"
 
-  set -- omnicored "$@"
+  set -- omnixepd "$@"
 fi
 
-if [[ $(echo "$1" | cut -c1) = "-" ]] || [[ "$1" = "omnicored" ]]; then
+if [[ $(echo "$1" | cut -c1) = "-" ]] || [[ "$1" = "omnixepd" ]]; then
   mkdir -p "$DATA_DIR"
   chmod 700 "$DATA_DIR"
 
@@ -16,7 +16,7 @@ if [[ $(echo "$1" | cut -c1) = "-" ]] || [[ "$1" = "omnicored" ]]; then
   set -- "$@" -datadir="$DATA_DIR"
 fi
 
-if [[ "$1" = "omnicored" ]] || [[ "$1" = "omnicore-cli" ]] || [[ "$1" = "bitcoin-tx" ]]; then
+if [[ "$1" = "omnixepd" ]] || [[ "$1" = "omnixep-cli" ]] || [[ "$1" = "xep-tx" ]]; then
   echo
   exec "$@"
 fi

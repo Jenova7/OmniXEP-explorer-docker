@@ -17,7 +17,7 @@
 
 
 ```
-git clone https://github.com/APshenkin/omnilayer-explorer-docker.git
+git clone https://github.com/MotoAcidic/omnilayer-explorer-docker.git
 cd omnilayer-explorer-docker
 // edit configurations if you want
 docker-compose build

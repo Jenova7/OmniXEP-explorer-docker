@@ -45,7 +45,7 @@ RUN git submodule init && git submodule update
 RUN  ./autogen.sh && ./configure && make && make install
 
 # Install omniapi
-WORKDIR /home/ubuntu
+WORKDIR /home/ubuntu/
 
 ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
 
@@ -61,7 +61,7 @@ RUN mkdir /home/ubuntu/omniapi/logs/
 RUN cp  /home/ubuntu/omniapi/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
 
 #Setup omniapi configs
-COPY bitcoin.conf /home/ubuntu/.bitcoin/
+COPY bitcoin.conf /home/ubuntu/.omnixep/
 COPY sql.conf /home/ubuntu/.omni/
 COPY config.py /home/ubuntu/omniapi/api/config.py
 
