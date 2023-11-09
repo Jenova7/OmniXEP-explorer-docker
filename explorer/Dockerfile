@@ -13,11 +13,11 @@ RUN apt-get install -y git-core \
                        g++ \
                        libtool \
                        pkg-config \
-                       make \
-                       python2.7
+                       make 
+                       #python2.7
 
-RUN ln -s /usr/bin/python2.7 /usr/bin/python
-RUN ln -s /usr/bin/python2.7 /usr/bin/python2
+#RUN ln -s /usr/bin/python2.7 /usr/bin/python
+#RUN ln -s /usr/bin/python2.7 /usr/bin/python2
 
 #RUN add-apt-repository -y ppa:linuxuprising/libpng12
 #RUN apt-get update -y
