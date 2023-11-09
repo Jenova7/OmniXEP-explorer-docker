@@ -40,7 +40,7 @@ WORKDIR /home/ubuntu
 
 RUN git clone https://github.com/MotoAcidic/omniEngine.git
 #ARG SSH_PRIVATE_KEY
-COPY omniEngine /home/ubuntu/omniEngine
+#COPY omniEngine /home/ubuntu/omniEngine
 #RUN git clone git@github.com:VXXL-Project/omniEngine.git
 WORKDIR /home/ubuntu/omniEngine
 
