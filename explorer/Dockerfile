@@ -9,6 +9,7 @@ RUN apt-get install -y git-core \
                        libpng-dev \
                        autoconf \
                        gcc \
+                       nodejs \
                        g++ \
                        libtool \
                        pkg-config \
