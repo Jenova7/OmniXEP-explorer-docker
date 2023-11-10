@@ -9,7 +9,6 @@ RUN apt-get install -y git-core \
                        libpng-dev \
                        autoconf \
                        gcc \
-                       npm \
                        g++ \
                        libtool \
                        pkg-config \
@@ -29,6 +28,12 @@ RUN apt-get install -y git-core \
 
 #RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64.deb
 #RUN dpkg -i dumb-init_*.deb
+
+#Install NPM package
+RUN apt-get update && apt-get install -y npm
+
+#Install more modern version after npm is installed
+RUN npm i -g n && n lts && npm i -g npm@latest
 
 # Install omni explorer
 WORKDIR /home/ubuntu
