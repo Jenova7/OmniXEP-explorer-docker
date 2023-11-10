@@ -42,11 +42,10 @@ RUN nodemon -v
 WORKDIR /home/ubuntu
 
 #ARG OMNILAYER_VERSION=c706fda96f361b452e4196dcb34d2da44f9d39b0
-WORKDIR /home/ubuntu/
 RUN git clone -b xep-testing https://github.com/MotoAcidic/omniexplorer.git
 #COPY omniexplorer /home/ubuntu/omniexplorer
 #RUN git clone git@github.com:VXXL-Project/omniexplorer.git
-
+WORKDIR /home/ubuntu/omniexplorer
 #RUN git checkout ${OMNILAYER_VERSION}
 
 # Patch several files
@@ -55,8 +54,8 @@ COPY package.json /home/ubuntu/omniexplorer/package.json
 COPY constants.js /home/ubuntu/omniexplorer/app/containers/App/constants.js
 COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
 
-RUN npm install
-RUN npm run build
+RUN sudo npm install
+RUN sudo npm run build
 
 EXPOSE 3000
 
