@@ -50,13 +50,14 @@ WORKDIR /home/ubuntu/omniexplorer
 
 # Patch several files
 
-COPY package.json /home/ubuntu/omniexplorer/package.json
+#COPY package.json /home/ubuntu/omniexplorer/package.json
 COPY constants.js /home/ubuntu/omniexplorer/app/containers/App/constants.js
 COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
 
 RUN npm install
 RUN npm run build
 
+ENV PORT=3000
 EXPOSE 3000
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
