@@ -54,8 +54,8 @@ COPY package.json /home/ubuntu/omniexplorer/package.json
 COPY constants.js /home/ubuntu/omniexplorer/app/containers/App/constants.js
 COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
 
-RUN sudo npm install
-RUN sudo npm run build
+RUN npm install
+RUN npm run build
 
 EXPOSE 3000
 
