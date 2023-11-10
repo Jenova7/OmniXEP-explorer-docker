@@ -5,7 +5,7 @@ ENV OMNICORE_VER          1.0.0
 ENV OMNICORE_ARCH         x86_64
 ENV OMNICOR_CHECKSUM      
 
-ENV DATA_DIR             /home/ubuntu/.bitcoin
+ENV DATA_DIR             /root/.omnixep
 ENV RPCALLOWIP          "::/0"
 ENV RPCUSER              omnicore
 ENV RPCPASSWORD          omnicore
