@@ -10,6 +10,7 @@ RUN apt-get install -y git-core \
                        autoconf \
                        gcc \
                        g++ \
+                       curl \
                        libtool \
                        pkg-config \
                        make 
@@ -29,11 +30,13 @@ RUN apt-get install -y git-core \
 #RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64.deb
 #RUN dpkg -i dumb-init_*.deb
 
-#Install NPM package
-RUN apt-get update && apt-get install -y npm
-
-#Install more modern version after npm is installed
-RUN npm i -g n && n lts && npm i -g npm@latest
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash
+RUN apt-get install --yes nodejs
+RUN node -v
+RUN npm -v
+RUN npm i -g nodemon
+RUN nodemon -v
 
 # Install omni explorer
 WORKDIR /home/ubuntu
