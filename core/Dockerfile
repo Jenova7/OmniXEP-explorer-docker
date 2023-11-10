@@ -1,14 +1,13 @@
 FROM ubuntu:16.04
 LABEL maintainer="TFinch <nexusnow@protonmail.com>"
 
-ENV OMNICORE_VER          1.0.0
-ENV OMNICORE_ARCH         x86_64
-ENV OMNICOR_CHECKSUM      
+ENV OMNICORE_VER=1.0.0
+ENV OMNICORE_ARCH=x86_64
 
-ENV DATA_DIR             /root/.omnixep
-ENV RPCALLOWIP          "::/0"
-ENV RPCUSER              omnicore
-ENV RPCPASSWORD          omnicore
+ENV DATA_DIR=/root/.omnixep
+ENV RPCALLOWIP="::/0"
+ENV RPCUSER=omnicore
+ENV RPCPASSWORD=omnicore
 
 RUN apt-get update && apt-get install -qq \
   curl
