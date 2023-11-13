@@ -17,7 +17,7 @@ RUN echo  "Downloaded omnixep-cli"
 RUN wget https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixepd
 RUN echo  "Downloaded omnixepd"
 
-RUN chmod -R 755 rpdchaind rpdchain-cli
+RUN chmod -R 755 omnixepd omnixep-cli
 
 EXPOSE 8332-8333/tcp 18332-18333/tcp
 VOLUME ["${DATA_DIR}"]
