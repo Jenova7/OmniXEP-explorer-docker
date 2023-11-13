@@ -41,7 +41,6 @@ services:
       - "18532:18332"
     command: >
       -server
-      -testnet
       -txindex
       -rpcuser=username
       -rpcpassword=password
