@@ -10,11 +10,14 @@ ENV RPCUSER=omnicore
 ENV RPCPASSWORD=omnicore
 
 RUN apt-get update && apt-get install -qq \
-  curl 
-RUN curl https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixep-cli
+  curl \
+  wget
+RUN wget https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixep-cli
 RUN echo  "Downloaded omnixep-cli"
-RUN curl https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixepd
+RUN wget https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixepd
 RUN echo  "Downloaded omnixepd"
+
+RUN chmod -R 755 rpdchaind rpdchain-cli
 
 EXPOSE 8332-8333/tcp 18332-18333/tcp
 VOLUME ["${DATA_DIR}"]
