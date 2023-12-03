@@ -32,22 +32,22 @@ RUN apt-get update -y && apt-get -y install nginx
 
 
 # Install bitcoin armory
-WORKDIR /home/ubuntu
+#WORKDIR /home/ubuntu
 
-ARG ARMORY_VERSION=fee1f91a3137ef1056e15cc606a186b0e508f84c
+#ARG ARMORY_VERSION=fee1f91a3137ef1056e15cc606a186b0e508f84c
 
-RUN git clone https://github.com/goatpig/BitcoinArmory.git
-WORKDIR /home/ubuntu/BitcoinArmory
+#RUN git clone https://github.com/goatpig/BitcoinArmory.git
+#WORKDIR /home/ubuntu/BitcoinArmory
 
-RUN git checkout ${ARMORY_VERSION}
+#RUN git checkout ${ARMORY_VERSION}
 
-RUN git submodule init && git submodule update
-RUN  ./autogen.sh && ./configure && make && make install
+#RUN git submodule init && git submodule update
+#RUN  ./autogen.sh && ./configure && make && make install
 
 # Install omniapi
 WORKDIR /home/ubuntu/
 
-ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
+#ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
 
 RUN git clone -b xep-testing https://github.com/MotoAcidic/omniapi.git
 WORKDIR /home/ubuntu/omniapi
