@@ -46,6 +46,8 @@ services:
       -rpcpassword=password
       -rpcallowip=172.0.0.0/8
       -rpcport=18332
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-core"}]'
 
   omni_engine:
     build:
