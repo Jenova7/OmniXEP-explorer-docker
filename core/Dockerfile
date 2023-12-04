@@ -26,9 +26,9 @@ RUN chmod -R 755 omnixepd omnixep-cli
 EXPOSE 8332-8333/tcp 18332-18333/tcp
 VOLUME ["${DATA_DIR}"]
 
-#ADD entrypoint.sh /entrypoint.sh
+ADD entrypoint.sh /entrypoint.sh
 
-#RUN chmod u+x /entrypoint.sh
+RUN chmod u+x /entrypoint.sh
 
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["omnixepd"]
