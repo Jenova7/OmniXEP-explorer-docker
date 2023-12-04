@@ -21,7 +21,7 @@ RUN echo  "Downloaded omnixepd"
 
 RUN chmod -R 755 omnixepd omnixep-cli
 
-RUN mkdir /root/.omnixep
+#RUN mkdir /root/.omnixep
 
 EXPOSE 8332-8333/tcp 18332-18333/tcp
 VOLUME ["${DATA_DIR}"]
