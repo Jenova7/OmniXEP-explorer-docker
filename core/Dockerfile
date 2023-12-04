@@ -12,7 +12,7 @@ ENV RPCPASSWORD=omnicore
 RUN apt-get update && apt-get install -qq \
   wget
 
-WORKDIR /root
+#WORKDIR /root
 
 RUN wget https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.0/omnixep-cli
 RUN echo  "Downloaded omnixep-cli"
