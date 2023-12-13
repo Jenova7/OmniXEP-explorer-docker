@@ -29,7 +29,7 @@ export const ECOSYSTEM_TEST = 2;
 export const ECOSYSTEM_PROD_NAME = 'Production';
 export const ECOSYSTEM_TEST_NAME = 'Test';
 
-export const OMNI_FIRST_BLOCK = 252317;
+export const OMNI_FIRST_BLOCK = 984500;
 export const FTC_FIRST_BLOCK = 3457508;
 export const LTC_FIRST_BLOCK = 2093636;
 export const FEATURE_ACTIVATION_TYPE_INT = 65534;

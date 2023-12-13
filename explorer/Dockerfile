@@ -50,12 +50,15 @@ WORKDIR /home/ubuntu/omniexplorer
 
 # Patch several files
 
+# No need to copy files since they are already in the main repo
+
 #COPY package.json /home/ubuntu/omniexplorer/package.json
-COPY constants.js /home/ubuntu/omniexplorer/app/containers/App/constants.js
-COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
+#COPY constants.js /home/ubuntu/omniexplorer/app/containers/App/constants.js
+#COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
 
 RUN npm install
-RUN npm run build
+RUN npm start
+#RUN npm run build
 
 EXPOSE 3000
 

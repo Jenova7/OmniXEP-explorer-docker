@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 #Install deps
 RUN apt-get update
@@ -61,21 +61,21 @@ RUN mkdir /home/ubuntu/omniapi/logs/
 RUN cp  /home/ubuntu/omniapi/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
 
 #Setup omniapi configs
-COPY bitcoin.conf /root/.omnixep/
+COPY omnixep.conf /root/.omnixep/
 COPY sql.conf /root/.omni/
-COPY config.py /home/ubuntu/omniapi/api/config.py
+#COPY config.py /home/ubuntu/omniapi/api/config.py
 
 # Patch rate limit to be able to disable them
-COPY flask_rate_limit.py /home/ubuntu/omniapi/api/flask_rate_limit.py
+#COPY flask_rate_limit.py /home/ubuntu/omniapi/api/flask_rate_limit.py
 
 # Patch cacher to be able to use only remote redis
-COPY cacher.py /home/ubuntu/omniapi/api/cacher.py
+#COPY cacher.py /home/ubuntu/omniapi/api/cacher.py
 
 # Patch start script to write logs to stdout
-COPY startApi.sh /home/ubuntu/omniapi/startApi.sh
+#COPY startApi.sh /home/ubuntu/omniapi/startApi.sh
 
 # Patch nginx configuration to be able to use CORS
-COPY omni-redirects /home/ubuntu/omniapi/etc/nginx/sites-available/omni-redirects
+#COPY omni-redirects /home/ubuntu/omniapi/etc/nginx/sites-available/omni-redirects
 
 # Add supervisor conf to launch nginx and api
 COPY supervisord.conf /etc/supervisor/conf.d/
