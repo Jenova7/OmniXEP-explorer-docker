@@ -50,32 +50,32 @@ WORKDIR /home/ubuntu/
 #ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
 
 RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-API.git
-WORKDIR /home/ubuntu/omniapi
+WORKDIR /home/ubuntu/OmniXEP-API
 
 #RUN git checkout ${OMNILAYER_VERSION}
 
 RUN pip install -r requirements.txt
-RUN mkdir /home/ubuntu/omniapi/logs/
+RUN mkdir /home/ubuntu/OmniXEP-API/logs/
 
 #Setup nginx main config
-RUN cp  /home/ubuntu/omniapi/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
+RUN cp  /home/ubuntu/OmniXEP-API/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
 
-#Setup omniapi configs
+#Setup OmniXEP-API configs
 COPY omnixep.conf /root/.omnixep/
 COPY sql.conf /root/.omni/
-#COPY config.py /home/ubuntu/omniapi/api/config.py
+#COPY config.py /home/ubuntu/OmniXEP-API/api/config.py
 
 # Patch rate limit to be able to disable them
-#COPY flask_rate_limit.py /home/ubuntu/omniapi/api/flask_rate_limit.py
+#COPY flask_rate_limit.py /home/ubuntu/OmniXEP-API/api/flask_rate_limit.py
 
 # Patch cacher to be able to use only remote redis
-#COPY cacher.py /home/ubuntu/omniapi/api/cacher.py
+#COPY cacher.py /home/ubuntu/OmniXEP-API/api/cacher.py
 
 # Patch start script to write logs to stdout
-#COPY startApi.sh /home/ubuntu/omniapi/startApi.sh
+#COPY startApi.sh /home/ubuntu/OmniXEP-API/startApi.sh
 
 # Patch nginx configuration to be able to use CORS
-#COPY omni-redirects /home/ubuntu/omniapi/etc/nginx/sites-available/omni-redirects
+#COPY omni-redirects /home/ubuntu/OmniXEP-API/etc/nginx/sites-available/omni-redirects
 
 # Add supervisor conf to launch nginx and api
 COPY supervisord.conf /etc/supervisor/conf.d/

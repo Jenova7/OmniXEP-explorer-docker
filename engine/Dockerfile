@@ -6,19 +6,20 @@ RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:openjdk-r/ppa
 RUN apt-get update
 RUN apt-get install -y git-core \
-                     # python-dev \
+                      # python-dev \
                       libffi-dev \
                       libpq-dev \
                       postgresql \
                       libcurl4-openssl-dev \
-                     # python-pip \
+                      # python-pip \
                       supervisor \
                       curl \
                       openjdk-8-jre
-RUN apt-get install -y wget build-essential && wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz && tar xf Python-2.7.18.tgz && cd Python-2.7.18 && ./configure && make && make install
-RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py \
-&&  python get-pip.py \
-&& python -m pip install python-crontab==2.5.1
+
+ RUN apt-get install -y wget build-essential && wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz && tar xf Python-2.7.18.tgz && cd Python-2.7.18 && ./configure && make && make install
+ RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py \
+ &&  python get-pip.py \
+ && python -m pip install python-crontab==2.5.1
 
 #RUN python2 -m pip install python-crontab==2.5.1
 
@@ -42,7 +43,7 @@ RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-engine.git
 #ARG SSH_PRIVATE_KEY
 #COPY omniEngine /home/ubuntu/omniEngine
 #RUN git clone git@github.com:VXXL-Project/omniEngine.git
-WORKDIR /root/omniEngine
+WORKDIR /root/OmniXEP-engine
 
 #RUN git checkout ${OMNILAYER_VERSION}
 
