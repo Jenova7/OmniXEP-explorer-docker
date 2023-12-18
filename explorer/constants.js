@@ -29,7 +29,7 @@ export const ECOSYSTEM_TEST = 2;
 export const ECOSYSTEM_PROD_NAME = 'Production';
 export const ECOSYSTEM_TEST_NAME = 'Test';
 
-export const OMNI_FIRST_BLOCK = 252317;
+export const OMNI_FIRST_BLOCK = 984500;
 export const FTC_FIRST_BLOCK = 3457508;
 export const LTC_FIRST_BLOCK = 2093636;
 export const FEATURE_ACTIVATION_TYPE_INT = 65534;
@@ -44,10 +44,10 @@ let apiUrlBase;
 if (/localhost/i.test(hostName)) {
   apiUrlBase = 'https://localhost:4005/v1';
 } else {
-  if (hostName.indexOf('vxxs-explorer.vxxl.org') > -1) {
-    apiUrlBase = 'https://vxxs-explorer-api.vxxl.org/v1'
+    if (hostName.indexOf('51.195.40.45') > -1) {
+      apiUrlBase = '51.195.40.45/v1'
   } else {
-    apiUrlBase = 'https://vxxs-explorer-api-testnet.vxxl.org/v1'
+        apiUrlBase = '51.195.40.45/v1'
   }
 }
 

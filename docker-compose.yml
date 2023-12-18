@@ -6,12 +6,12 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - omni_postgres
-#      - omni_core
+      - omni_core
       - omni_engine
       - omni_redis
     links:
       - omni_postgres
-#      - omni_core
+      - omni_core
       - omni_redis
     ports:
       - "4005:80"
@@ -30,17 +30,36 @@ services:
       - "4006:3000"
     labels:
       com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-explorer"}]'
+
+  omni_core:
+    build:
+      context: core
+      dockerfile: Dockerfile
+    volumes:
+      - omnicore:/root/.omnixep
+    ports:
+      - "18532:18332"
+    command: >
+      -server
+      -txindex
+      -rpcuser=username
+      -rpcpassword=password
+      -rpcallowip=172.0.0.0/8
+      -rpcport=18332
+    labels:
+      com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-core"}]'
+
   omni_engine:
     build:
       context: engine
       dockerfile: Dockerfile
     depends_on:
       - omni_postgres
- #     - omni_core
+      - omni_core
       - omni_redis
     links:
       - omni_postgres
-  #    - omni_core
+      - omni_core
       - omni_redis
     environment:
       FLYWAY_PLACEHOLDERS_OMNIAPIPASSWORD: omniapipass
@@ -50,7 +69,7 @@ services:
       PGHOST: omni_postgres
       PGPORT: 5432
       OMNIDB_DATABASE: omni
-      NETWORK: testnet
+      NETWORK: production
     labels:
       com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-engine"}]'
 
@@ -74,3 +93,4 @@ services:
 
 volumes:
   pgdata:
+  omnicore:

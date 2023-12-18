@@ -1,27 +1,28 @@
-# Omni explorer in Docker
+# Omni explorer in Podman
 
-  This is setup in docker-compose for omnicore  explorer. Several services are launched:
-  * [Omnicore node](https://github.com/OmniLayer/omnicore)
-  * [Omnicore api](https://github.com/OmniLayer/omniapi)
-  * [Omnicore engine](https://github.com/OmniLayer/omniEngine)
-  * [Omnicore explorer](https://github.com/OmniLayer/omniexplorer)
+  This is setup in podman-compose for omnixep explorer. Several services are launched:
+  * [OmniXep node](https://github.com/ElectraProtocol/XEP-Core)
+  * [OmniXep api](https://github.com/ElectraProtocol/OmniXEP-API)
+  * [OmniXep engine](https://github.com/ElectraProtocol/OmniXEP-engine)
+  * [OmniXep explorer](https://github.com/ElectraProtocol/OmniXEP-explorer)
   * Redis
   * Postgres
 
 ## Prerequisite
- * docker 
- * docker-compose
+ * podman 
+ * podman-compose
+ * Ubuntu 20.10 +
  
  
 ## Install
 
 
 ```
-git clone https://github.com/APshenkin/omnilayer-explorer-docker.git
+git clone https://github.com/MotoAcidic/omnilayer-explorer-docker.git
 cd omnilayer-explorer-docker
 // edit configurations if you want
-docker-compose build
-docker-compose up -d
+podman-compose build
+podman-compose up -d
 ```
 
 ## Configuration
