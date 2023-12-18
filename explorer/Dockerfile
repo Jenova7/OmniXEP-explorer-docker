@@ -57,8 +57,8 @@ WORKDIR /home/ubuntu/omniexplorer
 #COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
 
 RUN npm install
-RUN npm start
-#RUN npm run build
+#RUN npm start
+RUN npm run build
 
 EXPOSE 3000
 

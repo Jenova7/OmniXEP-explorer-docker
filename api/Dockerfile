@@ -49,7 +49,7 @@ WORKDIR /home/ubuntu/
 
 #ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
 
-RUN git clone -b xep-testing https://github.com/MotoAcidic/omniapi.git
+RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-API.git
 WORKDIR /home/ubuntu/omniapi
 
 #RUN git checkout ${OMNILAYER_VERSION}

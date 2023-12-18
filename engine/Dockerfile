@@ -38,7 +38,7 @@ WORKDIR /root
 
 #ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
 
-RUN git clone https://github.com/MotoAcidic/omniEngine.git
+RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-engine.git
 #ARG SSH_PRIVATE_KEY
 #COPY omniEngine /home/ubuntu/omniEngine
 #RUN git clone git@github.com:VXXL-Project/omniEngine.git
