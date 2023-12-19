@@ -17,6 +17,6 @@ fi
 
 cd /flyway && FLYWAY_URL="jdbc:postgresql://${PGHOST}:${PGPORT}/${OMNIDB_DATABASE}" FLYWAY_PASSWORD="${PGPASSWORD}" flyway -user=${PGUSER} migrate
 
-python /root/omniEngine/install/installOmniEngineCronJob.py
+python /root/OmniXEP-engine/install/installOmniEngineCronJob.py
 
 /usr/sbin/cron -f -L /dev/stdout

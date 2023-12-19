@@ -16,7 +16,8 @@ if [[ $(echo "$1" | cut -c1) = "-" ]] || [[ "$1" = "omnixepd" ]]; then
   set -- "$@" -datadir="$DATA_DIR"
 fi
 
-if [[ "$1" = "omnixepd" ]] || [[ "$1" = "omnixep-cli" ]] || [[ "$1" = "xep-tx" ]]; then
+if [[ "$1" = "omnixepd" ]] || [[ "$1" = "omnixep-cli" ]]; then
+#if [[ "$1" = "omnixepd" ]] || [[ "$1" = "omnixep-cli" ]] || [[ "$1" = "xep-tx" ]]; then
   echo
   exec "$@"
 fi
