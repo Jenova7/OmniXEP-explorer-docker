@@ -41,7 +41,7 @@ WORKDIR /root
 
 RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-engine.git
 #ARG SSH_PRIVATE_KEY
-#COPY omniEngine /home/ubuntu/omniEngine
+#COPY OmniXEP-engine /home/ubuntu/OmniXEP-engine
 #RUN git clone git@github.com:VXXL-Project/omniEngine.git
 WORKDIR /root/OmniXEP-engine
 
@@ -54,20 +54,20 @@ RUN python -m pip install -r requirements.txt
 #Setup configs
 COPY bitcoin.conf /root/.bitcoin/
 COPY sql.conf /root/.omni/
-COPY run.sh /root/omniEngine/run.sh
-COPY config.py /root/omniEngine/config.py
+COPY run.sh /root/OmniXEP-engine/run.sh
+COPY config.py /root/OmniXEP-engine/config.py
 
 # Patch installOmniEngineCronJob to forward network variable and pass logs to docker stdout
-COPY installOmniEngineCronJob.py /root/omniEngine/install/installOmniEngineCronJob.py
+COPY installOmniEngineCronJob.py /root/OmniXEP-engine/install/installOmniEngineCronJob.py
 
 # Patch omniEngine to force stdout print and use other configuration for testnet
 #COPY omniEngine.py /root/omniEngine/omniEngine.py
 #COPY sql.py /root/omniEngine/sql.py
-#COPY db /flyway/sql/
+COPY db /flyway/sql/
 
-RUN chmod +x /root/omniEngine/run.sh
+RUN chmod +x /root/OmniXEP-engine/run.sh
 
-RUN mkdir /root/omniEngine/logs
+RUN mkdir /root/OmniXEP-engine/logs
 
 # add supervisor conf to launch nginx and api
 COPY supervisord.conf /etc/supervisor/conf.d/

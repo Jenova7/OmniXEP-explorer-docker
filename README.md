@@ -9,21 +9,46 @@
   * Postgres
 
 ## Prerequisite
- * podman 
- * podman-compose
+ * podman or docker
+ * podman-compose or docker-compose
  * Ubuntu 20.10 +
  
  
 ## Install
 
-
+Podman
 ```
-git clone https://github.com/MotoAcidic/omnilayer-explorer-docker.git
-cd omnilayer-explorer-docker
+git clone https://github.com/ElectraProtocol/OmniXEP-explorer-docker.git
+cd OmniXEP-explorer-docker
 // edit configurations if you want
 podman-compose build
 podman-compose up -d
 ```
+
+Docker
+```
+git clone https://github.com/ElectraProtocol/OmniXEP-explorer-docker.git
+cd OmniXEP-explorer-docker
+
+// edit configurations if you want
+Docker-compose build --no-cache
+Docker-compose up -d
+```
+
+## Maintain
+  If you need to stop and remove all docker / podman containers use below commands
+
+  Docker
+  ```
+  docker stop $(docker ps -a -q)
+  docker remove $(docker ps -a -q)
+  ```
+
+  Podman
+  ```
+  podman stop $(podman ps -a -q)
+  podman rm $(podman ps -a -q)
+  ```
 
 ## Configuration
   Each service has own configuration (list are below)
