@@ -9,8 +9,8 @@
   * Postgres
 
 ## Prerequisite
- * podman or docker
- * podman-compose or docker-compose
+ * podman 
+ * podman-compose
  * Ubuntu 20.10 +
  
  

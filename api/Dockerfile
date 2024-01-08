@@ -3,26 +3,18 @@ FROM ubuntu:18.04
 #Install deps
 RUN apt-get update
 RUN apt-get install -y git-core \
-                      pkg-config \
-                      build-essential \
-                      pyqt4-dev-tools \
+                      pkg-config build-essential \
+                      pyqt4-dev-tools python-qt4 python-dev python-twisted python-pip python-psutil \
                       swig \
-                      libqtcore4 \
-                      libqt4-dev \
-                      python-qt4 \
-                      python-dev \
-                      python-twisted \
-                      python-psutil \
-                      autotools-dev \
-                      autoconf \
-                      libtool \
-                      python-pip \
-                      wget \
-                      lsb-core \
-                      supervisor \
-                      libpq-dev \
-                      libffi-dev \
-                      libssl-dev
+                      libqtcore4 libqt4-dev libtool libpq-dev libffi-dev libssl-dev \
+                      autotools-dev autoconf lsb-core supervisor wget \
+                      build-essential libevent-dev libtool autotools-dev automake pkg-config \
+                      bsdmainutils curl git libboost-all-dev libssl-dev libboost-tools-dev libdb++-dev \
+                      libevent-dev libqt5gui5 libqt5core5a libqt5dbus5 qttools5-dev qttools5-dev-tools \
+                      libprotobuf-dev protobuf-compiler libevent-dev libboost-all-dev libdb++-dev libssl-dev \
+                      libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev \
+                      libboost-test-dev libboost-thread-dev g++-arm-linux-gnueabihf gcc-aarch64-linux-gnu nsis libgmp3-dev \
+                      libdb-dev                       
 
 # Install nginx
 RUN cd /tmp/ && wget http://nginx.org/keys/nginx_signing.key
@@ -30,29 +22,29 @@ RUN apt-key add /tmp/nginx_signing.key
 RUN sh -c "echo 'deb http://nginx.org/packages/mainline/ubuntu/ '$(lsb_release -cs)' nginx' > /etc/apt/sources.list.d/nginx.list"
 RUN apt-get update -y && apt-get -y install nginx
 
+# Move the daemon and cli to a new folder outside of the source to better keep files clean
+WORKDIR /root/
 
-# Install bitcoin armory
-#WORKDIR /home/ubuntu
+# Create the config file for omnixep
+RUN mkdir /root/.omnixep/
+WORKDIR /root/.omnixep/
+COPY omnixep.conf /root/.omnixep/
 
-#ARG ARMORY_VERSION=fee1f91a3137ef1056e15cc606a186b0e508f84c
+# Now make a new folder for the daemon and cli
+WORKDIR /home/ubuntu/
+RUN mkdir /home/ubuntu/core/
+WORKDIR /home/ubuntu/core/
 
-#RUN git clone https://github.com/goatpig/BitcoinArmory.git
-#WORKDIR /home/ubuntu/BitcoinArmory
-
-#RUN git checkout ${ARMORY_VERSION}
-
-#RUN git submodule init && git submodule update
-#RUN  ./autogen.sh && ./configure && make && make install
+RUN wget https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.1/omnixepd
+RUN wget https://github.com/MotoAcidic/omnilayer-explorer-docker/releases/download/1.0.1/omnixep-cli
+RUN chmod -R 755 omnixepd omnixep-cli
+RUN ./omnixepd -daemon
 
 # Install omniapi
 WORKDIR /home/ubuntu/
 
-#ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
-
 RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-API.git
 WORKDIR /home/ubuntu/OmniXEP-API
-
-#RUN git checkout ${OMNILAYER_VERSION}
 
 RUN pip install -r requirements.txt
 RUN mkdir /home/ubuntu/OmniXEP-API/logs/
@@ -61,9 +53,8 @@ RUN mkdir /home/ubuntu/OmniXEP-API/logs/
 RUN cp  /home/ubuntu/OmniXEP-API/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
 
 #Setup OmniXEP-API configs
-COPY omnixep.conf /root/.omnixep/
 COPY sql.conf /root/.omni/
-#COPY config.py /home/ubuntu/OmniXEP-API/api/config.py
+COPY config.py /home/ubuntu/OmniXEP-API/api/config.py
 
 # Patch rate limit to be able to disable them
 #COPY flask_rate_limit.py /home/ubuntu/OmniXEP-API/api/flask_rate_limit.py
@@ -81,4 +72,5 @@ COPY sql.conf /root/.omni/
 COPY supervisord.conf /etc/supervisor/conf.d/
 
 EXPOSE 8080
+EXPOSE 8332-8333/tcp 18332-18333/tcp
 CMD ["/usr/bin/supervisord"]
