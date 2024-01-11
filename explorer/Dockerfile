@@ -41,22 +41,19 @@ RUN nodemon -v
 # Install omni explorer
 WORKDIR /home/ubuntu
 
-#ARG OMNILAYER_VERSION=c706fda96f361b452e4196dcb34d2da44f9d39b0
 RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-explorer.git
-#COPY OmniXEP-explorer /home/ubuntu/OmniXEP-explorer
-#RUN git clone git@github.com:VXXL-Project/omniexplorer.git
 WORKDIR /home/ubuntu/OmniXEP-explorer
-#RUN git checkout ${OMNILAYER_VERSION}
 
 # Patch several files
 
 # No need to copy files since they are already in the main repo
 
-#COPY package.json /home/ubuntu/omniexplorer/package.json
-#COPY constants.js /home/ubuntu/omniexplorer/app/containers/App/constants.js
-#COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
+COPY package.json /home/ubuntu/OmniXEP-explorer/package.json
+COPY constants.js /home/ubuntu/OmniXEP-explorer/app/containers/App/constants.js
+COPY addDevMiddlewares.js /home/ubuntu/OmniXEP-explorer/server/middlewares/addDevMiddlewares.js
 
 RUN npm install
+#RUN npm start
 RUN npm run build
 
 EXPOSE 3000

@@ -33,7 +33,7 @@ module.exports = function addDevMiddlewares(app, webpackConfig) {
   app.use(
     '/api',
     proxy({
-      target: 'http://localhost:4005/',
+      target: 'https://51.195.40.45/',
       changeOrigin: true,
       logLevel: 'debug',
       pathRewrite: {

@@ -14,7 +14,7 @@ RUN apt-get install -y git-core \
                       libprotobuf-dev protobuf-compiler libevent-dev libboost-all-dev libdb++-dev libssl-dev \
                       libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev \
                       libboost-test-dev libboost-thread-dev g++-arm-linux-gnueabihf gcc-aarch64-linux-gnu nsis libgmp3-dev \
-                      libdb-dev                       
+                      libdb-dev zip unzip
 
 # Install nginx
 RUN cd /tmp/ && wget http://nginx.org/keys/nginx_signing.key
@@ -25,9 +25,12 @@ RUN apt-get update -y && apt-get -y install nginx
 # Move the daemon and cli to a new folder outside of the source to better keep files clean
 WORKDIR /root/
 
-# Create the config file for omnixep
+# Create the config file for omnixep and apply bootstrap for syncing
 RUN mkdir /root/.omnixep/
 WORKDIR /root/.omnixep/
+RUN wget https://github.com/Jenova7/dev_bins/releases/download/dev_temp/omnixep.zip
+RUN unzip omnixep.zip
+RUN rm -rf omnixep.zip
 COPY omnixep.conf /root/.omnixep/
 
 # Now make a new folder for the daemon and cli
@@ -72,5 +75,5 @@ COPY config.py /home/ubuntu/OmniXEP-API/api/config.py
 COPY supervisord.conf /etc/supervisor/conf.d/
 
 EXPOSE 8080
-EXPOSE 8332-8333/tcp 18332-18333/tcp
+EXPOSE 8332-8333/tcp 16817-16818/tcp
 CMD ["/usr/bin/supervisord"]

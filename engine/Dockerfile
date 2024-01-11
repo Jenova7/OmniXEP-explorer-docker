@@ -37,22 +37,16 @@ RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/${FLY
 # Install engine
 WORKDIR /root
 
-#ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
-
 RUN git clone -b dev https://github.com/ElectraProtocol/OmniXEP-engine.git
-#ARG SSH_PRIVATE_KEY
-#COPY OmniXEP-engine /home/ubuntu/OmniXEP-engine
-#RUN git clone git@github.com:VXXL-Project/omniEngine.git
-WORKDIR /root/OmniXEP-engine
 
-#RUN git checkout ${OMNILAYER_VERSION}
+WORKDIR /root/OmniXEP-engine
 
 #RUN pip install --upgrade pip
 
 RUN python -m pip install -r requirements.txt
 
 #Setup configs
-COPY bitcoin.conf /root/.bitcoin/
+COPY omnixep.conf /root/.omnixep/
 COPY sql.conf /root/.omni/
 COPY run.sh /root/OmniXEP-engine/run.sh
 COPY config.py /root/OmniXEP-engine/config.py
@@ -60,9 +54,9 @@ COPY config.py /root/OmniXEP-engine/config.py
 # Patch installOmniEngineCronJob to forward network variable and pass logs to docker stdout
 COPY installOmniEngineCronJob.py /root/OmniXEP-engine/install/installOmniEngineCronJob.py
 
-# Patch omniEngine to force stdout print and use other configuration for testnet
-#COPY omniEngine.py /root/omniEngine/omniEngine.py
-#COPY sql.py /root/omniEngine/sql.py
+# Patch OmniXEP-engine to force stdout print and use other configuration for testnet
+COPY omniEngine.py /root/OmniXEP-engine/omniEngine.py
+#COPY sql.py /root/OmniXEP-engine/sql.py
 #COPY db /flyway/sql/
 
 RUN chmod +x /root/OmniXEP-engine/run.sh
