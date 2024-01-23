@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:8-slim
+FROM ubuntu:18.04
 
 #Install deps
 RUN apt-get update
@@ -29,22 +29,26 @@ RUN ln -s /usr/bin/python2.7 /usr/bin/python2
 #RUN wget https://github.com/Yelp/dumb-init/releases/download/v1.2.1/dumb-init_1.2.1_amd64.deb
 #RUN dpkg -i dumb-init_*.deb
 
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_13.x | bash
+RUN apt-get install --yes nodejs
+RUN node -v
+RUN npm -v
+RUN npm i -g nodemon
+RUN nodemon -v
+
 # Install omni explorer
 WORKDIR /home/ubuntu
 
-#ARG OMNILAYER_VERSION=c706fda96f361b452e4196dcb34d2da44f9d39b0
-RUN git clone https://github.com/VXXL-Project/omniexplorer.git
-#COPY omniexplorer /home/ubuntu/omniexplorer
-#RUN git clone git@github.com:VXXL-Project/omniexplorer.git
-WORKDIR /home/ubuntu/omniexplorer
+RUN git clone -b test https://github.com/Jenova7/OmniXEP-explorer.git
+WORKDIR /home/ubuntu/OmniXEP-explorer
 
-#RUN git checkout ${OMNILAYER_VERSION}
 
 # Patch several files
 
-COPY package.json /home/ubuntu/omniexplorer/package.json
-COPY constants.js /home/ubuntu/omniexplorer/app/containers/App/constants.js
-COPY addDevMiddlewares.js /home/ubuntu/omniexplorer/server/middlewares/addDevMiddlewares.js
+COPY package.json /home/ubuntu/OmniXEP-explorer/package.json
+COPY constants.js /home/ubuntu/OmniXEP-explorer/app/containers/App/constants.js
+COPY addDevMiddlewares.js /home/ubuntu/OmniXEP-explorer/server/middlewares/addDevMiddlewares.js
 
 RUN npm install
 RUN npm run build

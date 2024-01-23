@@ -50,7 +50,7 @@ services:
       PGHOST: omni_postgres
       PGPORT: 5432
       OMNIDB_DATABASE: omni
-      NETWORK: testnet
+      NETWORK: mainnet
     labels:
       com.datadoghq.ad.logs: '[{"source": "omni-docker", "service": "omni-engine"}]'
 

@@ -30,52 +30,34 @@ RUN apt-key add /tmp/nginx_signing.key
 RUN sh -c "echo 'deb http://nginx.org/packages/mainline/ubuntu/ '$(lsb_release -cs)' nginx' > /etc/apt/sources.list.d/nginx.list"
 RUN apt-get update -y && apt-get -y install nginx
 
-
-# Install bitcoin armory
-WORKDIR /home/ubuntu
-
-ARG ARMORY_VERSION=fee1f91a3137ef1056e15cc606a186b0e508f84c
-
-RUN git clone https://github.com/goatpig/BitcoinArmory.git
-WORKDIR /home/ubuntu/BitcoinArmory
-
-RUN git checkout ${ARMORY_VERSION}
-
-RUN git submodule init && git submodule update
-RUN  ./autogen.sh && ./configure && make && make install
-
 # Install omniapi
 WORKDIR /home/ubuntu
 
-ARG OMNILAYER_VERSION=19498d0e80c9ff48c5de5c7fb455b31c0124983b
-
-RUN git clone https://github.com/VXXL-Project/omniapi.git
-WORKDIR /home/ubuntu/omniapi
-
-#RUN git checkout ${OMNILAYER_VERSION}
+RUN git clone -b test https://github.com/Jenova7/OmniXEP-API.git
+WORKDIR /home/ubuntu/OmniXEP-API
 
 RUN pip install -r requirements.txt
-RUN mkdir /home/ubuntu/omniapi/logs/
+RUN mkdir /home/ubuntu/OmniXEP-API/logs/
 
 #Setup nginx main config
-RUN cp  /home/ubuntu/omniapi/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
+RUN cp  /home/ubuntu/OmniXEP-API/etc/nginx/sites-available/default /etc/nginx/conf.d/default.conf
 
 #Setup omniapi configs
-COPY bitcoin.conf /root/.bitcoin/
+COPY omnixep.conf /root/.omnixep/
 COPY sql.conf /root/.omni/
-COPY config.py /home/ubuntu/omniapi/api/config.py
+COPY config.py /home/ubuntu/OmniXEP-API/api/config.py
 
 # Patch rate limit to be able to disable them
-COPY flask_rate_limit.py /home/ubuntu/omniapi/api/flask_rate_limit.py
+COPY flask_rate_limit.py /home/ubuntu/OmniXEP-API/api/flask_rate_limit.py
 
 # Patch cacher to be able to use only remote redis
-COPY cacher.py /home/ubuntu/omniapi/api/cacher.py
+COPY cacher.py /home/ubuntu/OmniXEP-API/api/cacher.py
 
 # Patch start script to write logs to stdout
-COPY startApi.sh /home/ubuntu/omniapi/startApi.sh
+COPY startApi.sh /home/ubuntu/OmniXEP-API/startApi.sh
 
 # Patch nginx configuration to be able to use CORS
-COPY omni-redirects /home/ubuntu/omniapi/etc/nginx/sites-available/omni-redirects
+COPY omni-redirects /home/ubuntu/OmniXEP-API/etc/nginx/sites-available/omni-redirects
 
 # Add supervisor conf to launch nginx and api
 COPY supervisord.conf /etc/supervisor/conf.d/

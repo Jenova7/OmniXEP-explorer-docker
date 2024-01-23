@@ -12,7 +12,7 @@ from crontab import CronTab
 #
 homeDir=os.environ['HOME']
 network=os.environ['NETWORK']
-engineCommand='NETWORK={1} python {0}/omniEngine/omniEngine.py >> /proc/1/fd/1'.format(homeDir, network)
+engineCommand='NETWORK={1} python {0}/OmniXEP-engine/omniEngine.py >> /proc/1/fd/1'.format(homeDir, network)
 engineComment='Update OmniEngne DB using RPC'
 
 #

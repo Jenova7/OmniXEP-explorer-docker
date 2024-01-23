@@ -1,13 +1,13 @@
 {
-  "name": "omniexplorer",
-  "version": "7.2.0",
-  "description": "Omni Explorer is a Block Explorer and Analytics Platform for the Omni Layer",
+  "name": "OmniXEP-Explorer",
+  "version": "1.0.0",
+  "description": "OmniXEP Explorer is a Block Explorer and Analytics Platform for the OmniXEP Layer",
   "repository": {
     "type": "git",
-    "url": "https://github.com/omniLayer/omniexplorer.git"
+    "url": "https://github.com/Jenova7/OmniXEP-explorer.git"
   },
   "license": "MIT",
-  "author": "OmniLayer Team",
+  "author": "OmniXEP Team",
   "scripts": {
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",

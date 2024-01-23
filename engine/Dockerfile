@@ -15,6 +15,7 @@ RUN apt-get install -y git-core \
                       supervisor \
                       curl \
                       openjdk-8-jre
+                      
 RUN apt-get install -y wget build-essential && wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz && tar xf Python-2.7.18.tgz && cd Python-2.7.18 && ./configure && make && make install
 RUN curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py \
 &&  python get-pip.py \
@@ -36,37 +37,31 @@ RUN curl -L https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/${FLY
 # Install engine
 WORKDIR /root
 
-#ARG OMNILAYER_VERSION=d855a49dfe4fb61f75f7c7e30356cc9031190365
+RUN git clone -b test https://github.com/Jenova7/OmniXEP-engine
 
-#RUN git clone https://github.com/OmniLayer/omniEngine.git
-#ARG SSH_PRIVATE_KEY
-COPY omniEngine /root/omniEngine
-#RUN git clone git@github.com:VXXL-Project/omniEngine.git
-WORKDIR /root/omniEngine
-
-#RUN git checkout ${OMNILAYER_VERSION}
+WORKDIR /root/OmniXEP-engine
 
 #RUN pip install --upgrade pip
 
 RUN python -m pip install -r requirements.txt
 
 #Setup configs
-COPY bitcoin.conf /root/.bitcoin/
+COPY omnixep.conf /root/.omnixep/
 COPY sql.conf /root/.omni/
-COPY run.sh /root/omniEngine/run.sh
-COPY config.py /root/omniEngine/config.py
+COPY run.sh /root/OmniXEP-engine/run.sh
+COPY config.py /root/OmniXEP-engine/config.py
 
 # Patch installOmniEngineCronJob to forward network variable and pass logs to docker stdout
-COPY installOmniEngineCronJob.py /root/omniEngine/install/installOmniEngineCronJob.py
+COPY installOmniEngineCronJob.py /root/OmniXEP-engine/install/installOmniEngineCronJob.py
 
 # Patch omniEngine to force stdout print and use other configuration for testnet
-#COPY omniEngine.py /root/omniEngine/omniEngine.py
+# COPY omniEngine.py /root/OmniXEP-engine/omniEngine.py
 #COPY sql.py /root/omniEngine/sql.py
 #COPY db /flyway/sql/
 
-RUN chmod +x /root/omniEngine/run.sh
+RUN chmod +x /root/OmniXEP-engine/run.sh
 
-RUN mkdir /root/omniEngine/logs
+RUN mkdir /root/OmniXEP-engine/logs
 
 # add supervisor conf to launch nginx and api
 COPY supervisord.conf /etc/supervisor/conf.d/
